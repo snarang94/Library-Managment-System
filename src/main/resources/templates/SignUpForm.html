@@ -1,0 +1,152 @@
+<html>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script>
+	function showPassword(str) {
+		if (str == "check1") {
+			var password = document.getElementById("password");
+			if (password.type === "password") {
+				password.type = "text";
+			} else {
+				password.type = "password";
+			}
+		} else if (str == "check2") {
+			var cpassword = document.getElementById("cpassword");
+			if (cpassword.type === "password") {
+				cpassword.type = "text";
+			} else {
+				cpassword.type = "password";
+			}
+		}
+	}
+</script>
+<style>
+td {
+	padding-bottom: 20px;
+	padding-right: 50px
+}
+
+h5 {
+	margin: 0;
+	font-weight: 400;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	height: 100vh;
+}
+
+
+#login-box {
+	box-shadow: 1px 1px 7px 7px rgba(0.75, 0.75, 0.75, 0.75);
+}
+
+#login .container #login-row #login-column #login-box {
+	margin-top: 60px;
+	max-width: 600px;
+	height: 800px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+}
+p{
+color:red;
+font-size:medium;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link
+	{
+	margin-top: -85px;
+}
+</style>
+
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/welcome">
+    		<img src="/images/ApplicationLogo.png" alt="Logo" style="width:70px;height:70px">
+ 		 </a>
+  		<span class="navbar-brand mb-0 h1"><h2 style="text-align:center">Public Library</h2></span>
+  		<div style="float: right">
+			<p style="float: left;color:white;" th:text="${sessionClient}"></p>
+		</div>
+	</nav>
+	<div id="login">
+		<h3 class="text-center text-dark pt-5">Registration</h3>
+		<div class="container">
+			<div id="login-row"
+				class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form th:action="@{/signUp}" th:object="${user}" method="post">
+							<div class="form-group">
+								<label for="fullname" class="text-info">Full Name:</label><br>
+								<input name="uname" type="text" th:field="*{fullName}" /><br>
+								<p th:text="${fullName}" />
+							</div>
+							<div class="form-group">
+								<label for="phone" class="text-info">Phone Number:</label><br>
+								<input maxlength="10" type="number" name="uphone" th:field="*{phoneNumber}" /><br>
+								<p th:text="${phoneNumber}" />
+							</div>
+
+							<div class="form-group">
+								<label for="username" class="text-info">Email:</label><br>
+								<input name="uemail" type="text" id="uemail" 
+									class="form-control" th:field="*{email}" /><br>
+								<p th:text="${email}" />
+							</div>
+							<div class="form-group">
+								<label for="password" class="text-info">Password:</label><br>
+								<input name="upass" type="password" th:field="*{password}" /><br>
+								<p th:text="${password}"></p>
+								<input type="checkbox" id="check1"
+									onclick="showPassword('check1')" />Show Password
+							</div>
+							<div class="form-group">
+								<label for="cpassword" class="text-info">Confirm
+									Password:</label><br> <input name="ucpass" type="password"
+									th:field="*{cpassword}" /><br>
+								<p th:text="${cpassword}"></p>
+								<input type="checkbox" id="check2"
+									onclick="showPassword('check2')">Show Password
+								</td>
+							</div>
+
+							<div class="form-group">
+								<input type="submit" name="submit" class="btn btn-info btn-md"
+									value="submit">
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+

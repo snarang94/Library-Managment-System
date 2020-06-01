@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+	<title>Public Library Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<style>
+td {
+	padding-bottom: 20px;
+	padding-right: 50px
+}
+
+h5 {
+	margin: 0;
+	font-weight: 400;
+}
+
+.boxed {
+	border: 1px solid green;
+	padding: 30px;
+}
+
+a, a label {
+	cursor: pointer;
+}
+/* Create two equal columns that floats next to each other */
+.column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+</style>
+<script>
+	//Get the elements with class="column"
+	var elements = document.getElementsByClassName("column");
+
+	// Declare a loop variable
+	var i;
+
+	// List View
+	function listView() {
+		for (i = 0; i < elements.length; i++) {
+			elements[i].style.width = "100%";
+		}
+	}
+
+	// Grid View
+	function gridView() {
+		for (i = 0; i < elements.length; i++) {
+			elements[i].style.width = "50%";
+		}
+	}
+</script>
+</head>
+<body  action="post">
+	<!-- <div style="float: left;">
+		<p>
+			Search Terms <input id="searchTerms" type="text"
+				style="width: 250px;" />
+		</p>
+	</div> -->
+
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/welcome">
+    		<img src="/images/ApplicationLogo.png" alt="Logo" style="width:70px;height:70px">
+ 		 </a>
+  		<span class="navbar-brand mb-0 h1"><h2 style="text-align:center">Public Library</h2></span>
+  		<div style="float: right:display:inline">
+			<p style="float: left;color:white;" th:text="${sessionClient}"></p>
+			<a style="float: right; margin: 0 100px" th:if="${loggingStatus}=='Logout'" href="/logOut"><p
+				th:text="${loggingStatus}"></p></a>
+			<a style="float: right; margin: 0 100px" th:if="${loggingStatus}=='Register / Login'" href="/signIn"><p
+				th:text="${loggingStatus}"></p></a>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<form onsubmit="return validateSearchForm()" method="post" 
+				th:action="@{/basicSearch}" style="margin-left:14px;margin-top:20px;margin-bottom:50px;line-height: 3em;">
+				<a href="/advancedSearch"> Search Terms</a> <input id="searchTerms"
+					type="text" th:field="${searchTermsAndPage.searchTerms}"
+					style="width: 300px;" />
+			</form>
+		</div>
+	
+	
+		<!-- <span style="float: right; margin-right: 20px; line-height: 3em;"
+			th:text="${userEmail}">Test</span> -->
+		
+		
+		
+			<table th:if="*{isAdminAval}">
+				<tr>
+					<p style="color:blue;">Admin Tools</p>
+				</tr>
+				
+				<tr>
+					<td><a href="/addBook"><div class="boxed">Add Library
+								items</div></a></td>
+					<td><a href="/loan"><div class="boxed">Loan
+								Management</div></a></td>
+				</tr>
+			</table>
+
+		<span style="color: blue; display: block; width: 100%;margin-bottom:10px;"><br>New
+			arrivals</span>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="books:${book}">
+			<a th:href="@{'/itemDetail/Book/'+${books.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+books.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${books.title}"></p>
+			</a>
+		</div>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="movies:${movie}">
+			<a th:href="@{'/itemDetail/Movie/'+${movies.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+movies.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${movies.title}" ></p>
+			</a>
+		</div>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="musics:${music}">
+			<a th:href="@{'/itemDetail/Music/'+${musics.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+musics.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${musics.title}"></p>
+			</a>
+		</div>
+		<div style="margin-top: 50px;"></div>
+		<span style="color: blue; display: block; width: 100%;margin-bottom:10px;">Most
+			purchased</span>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="favbooks:${favBooks}">
+			<a th:href="@{'/itemDetail/Book/'+${favbooks.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+favbooks.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${favbooks.title}"></p>
+			</a>
+		</div>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="favmovies:${favMovies}">
+			<a th:href="@{'/itemDetail/Movie/'+${favmovies.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+favmovies.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${favmovies.title}" ></p>
+			</a>
+		</div>
+		<div style="width: 11%; display: inline-block; vertical-align: top;text-align: center;"
+			th:each="favmusic:${favMusic}">
+			<a th:href="@{'/itemDetail/Music/'+${favmusic.itemID}}"> <img
+				th:src="${'data:image/png;base64,'+favmusic.coverImageUrl}"
+				width="100px" height="100px" />
+				<p th:text="${favmusic.title}" ></p>
+			</a>
+		</div>
+	
+		<div>
+			<table>
+				<tr>
+					<td><a href="/BrowsePage/Book"><div class="boxed">Books</div></a></td>
+					<td><a href="/BrowsePage/Movie"><div class="boxed">Movies</div></a></td>
+					<td><a href="/BrowsePage/Music"><div class="boxed">Music</div></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+</html>

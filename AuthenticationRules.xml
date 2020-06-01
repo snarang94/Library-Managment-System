@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Rules>
+	<emailRegex>[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*</emailRegex>
+	<phoneCheck>10</phoneCheck>
+	<adminId>devanshu.srivastava1@gmail.com</adminId>
+	<adminPwd>1qaz!QAZ</adminPwd>
+	<salt>SALT</salt>
+	<passwordlength>8</passwordlength>
+	<passwordUpperCase>3</passwordUpperCase>
+	<passwordLowerCase>3</passwordLowerCase>
+	<passwordSymbols>[:?!@#$%^&amp;*()]</passwordSymbols>
+</Rules>
+

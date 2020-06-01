@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName}---
+			[%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT"
+			follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+		<JDBC name="SQLAppender" tableName="LMS_LOGS">
+			<ConnectionFactory
+				class="com.library.dbConnection.DatabaseConnection" method="getConn" />
+			<Column name="LOG_ID" pattern="%u" />
+			<Column name="ENTRY_DATE" isEventTimestamp="true" />
+			<Column name="LOGGER" pattern="%logger" />
+			<Column name="LOG_LEVEL" pattern="%level" />
+			<Column name="MESSAGE" pattern="%m" />
+			<Column name="EXCEPTION" pattern="%throwable" />
+		</JDBC>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.library.dao" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.signIn" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.signUp" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.welcomePage" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.validations" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.forgotPassword" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.parsers" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.routes" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>		
+		<Logger name="com.library.localStorage" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="com.library.search" level="all" additivity="false">
+			<AppenderRef ref="SQLAppender" />
+		</Logger>
+		<Logger name="org.springframework.boot" level="info" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+		<Logger name="org.springframework.core" level="info" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+
+		<Root level="info">
+			<AppenderRef ref="ConsoleAppender" />
+			
+		</Root>
+	</Loggers>
+</Configuration>

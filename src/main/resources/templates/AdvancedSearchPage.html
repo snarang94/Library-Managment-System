@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Spring MVC Form Handling</title>
+      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+      <style>
+      td {
+      	padding-bottom: 20px;
+      	padding-right:50px
+      }
+      
+      h5 {
+      	margin: 0;
+      	font-weight:400;
+      }
+      </style>
+   </head>
+	<body id="pageBody" style="display:none">
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand" href="/welcome">
+	    		<img src="/images/ApplicationLogo.png" alt="Logo" style="width:70px;height:70px">
+	 		 </a>
+	  		<span class="navbar-brand mb-0 h1"><h2 style="text-align:center">Public Library</h2></span>
+	  		<div style="float: right:display:inline">
+				<p style="float: left;color:white;" th:text="${sessionClient}"></p>
+				<a style="float: right; margin: 0 100px" th:if="${loggingStatus}=='Logout'" href="/logOut"><p
+					th:text="${loggingStatus}"></p></a>
+				<a style="float: right; margin: 0 100px" th:if="${loggingStatus}=='Register / Login'" href="/signIn"><p
+					th:text="${loggingStatus}"></p></a>
+			</div>
+		</nav>
+		<div class="container">
+			<h2>Advanced Search</h2>   
+	      	<form id="advancedSearchForm" onsubmit="return validateSearchForm()" method="post" th:action="@{/advancedSearch}"
+	      			style="float: left; margin-top:20px; line-height: 1.5em;">
+	      		<div style="margin-bottom: 20px">
+	      			<p>Search Terms <input id="searchTerms" type="text" th:field="${searchTermsAndPage.searchTerms}" style="width:330px;"/></p>
+	      		</div>
+		        <table>            
+		        	<tr>
+		            	<td>           	
+			               	<div id="serchCategories" style="border:1px solid black">
+								<div>
+									<input type="checkbox" id="searchInBooks" th:field="${bookSearch.searchInBooks}" />
+									<label th:for="searchInBooks" th:text="Books"></label>
+								</div>	
+								<div>
+									<input type="checkbox" id = "searchInMovies" th:field="${moviesSearch.searchInMovies}"/>
+									<label th:for="searchInMovies" th:text="Movies"></label>
+								</div>	
+								<div>
+									<input type="checkbox" id = "searchInMusic" th:field="${musicSearch.searchInMusic}"/>
+									<label th:for="searchInMusic" th:text="Music"></label>
+								</div>	
+			               	</div>
+					   </td>
+		            </tr>
+	            
+		            <tr id="allDetailCheckboxes" valign="top">
+		               <td>
+		               <h5>Books</h5>
+		               	<div id="searchInBooksDetails" style="border:1px solid black; padding:5px">
+							<div>
+								<input type="checkbox" id="bookTitle" th:field="${bookSearch.searchBookTitle}"/>
+								<label th:for="bookTitle" th:text="'Title'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="bookAuthor" th:field="${bookSearch.searchBookAuthor}"/>
+								<label th:for="bookAuthor" th:text="'Author'"></label>
+							</div>
+							<div>
+								<input type="checkbox" id="bookCategory" th:field="${bookSearch.searchBookCategory}"/>
+								<label th:for="bookCategory" th:text="'Category'"></label>
+							</div>							
+							<div>
+								<input type="checkbox" id="bookPublisher" th:field="${bookSearch.searchBookPublisher}"/>
+								<label th:for="bookPublisher" th:text="'Publisher'"></label>
+							</div>
+							<div>
+								<input type="checkbox" id="bookDescription" th:field="${bookSearch.searchBookDescription}"/>
+								<label th:for="bookDescription" th:text="'Description'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="bookISBN" th:field="${bookSearch.searchBookISBN}"/>
+								<label th:for="bookISBN" th:text="'ISBN'"></label>
+							</div>		
+		               	</div>
+					   </td>
+		               <td>
+		                <h5>Music</h5>
+		               	<div id="searchInMusicDetails" style="border:1px solid black; padding:5px">
+							<div>
+								<input type="checkbox" id="musicAlbumName" th:field="${musicSearch.searchMusicAlbumName}"/>
+								<label th:for="musicAlbumName" th:text="'Album Name'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="musicArtist" th:field="${musicSearch.searchMusicArtist}"/>
+								<label th:for="musicArtist" th:text="'Artist'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="musicRecordLabel" th:field="${musicSearch.searchMusicRecordLabel}"/>
+								<label th:for="musicRecordLabel" th:text="'Record Label'"></label>
+							</div>	
+		               	</div>
+					   </td>
+		               <td>
+		                <h5>Movies</h5>
+		               	<div id="searchInMoviesDetails" style="border:1px solid black; padding:5px">
+							<div>
+								<input type="checkbox" id="movieTitle" th:field="${moviesSearch.searchMovieTitle}"/>
+								<label th:for="movieTitle" th:text="'Title'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="movieDirector" th:field="${moviesSearch.searchMovieDirector}"/>
+								<label th:for="movieDirector" th:text="'Director'"></label>
+							</div>	
+							<div>
+								<input type="checkbox" id="movieDescription" th:field="${moviesSearch.searchMovieDescription}"/>
+								<label th:for="movieDescription" th:text="'Description'"></label>
+							</div>	
+		               	</div>
+					   </td>
+		            </tr>
+		            <tr>
+		               <td colspan = "2">
+		                  <input type = "submit" value = "Search"/>
+		               </td>
+	            	</tr>
+	         </table>  
+	      </form>
+      </div>      
+   </body>
+   
+   	<script src="js/AdvancedSearchCreteriaInputValidation.js"></script>
+ 	<script src="js/AdvancedSearchPage.js"></script>
+   
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Error Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<style>
+	
+	.error-404
+	{
+	  margin: 0 auto;
+	  text-align: center;
+	}
+	.error-404 .error-code
+	{
+	  bottom: 60%;
+	  color: #4686CC;
+	  font-size: 96px;
+	  line-height: 100px;
+	  font-weight: bold;
+	}
+	.error-404 .error-desc 
+	{
+	  font-size: 12px;
+	  color: #647788;
+	}
+	.error-404 .m-b-10 
+	{
+	  margin-bottom: 10px!important;
+	}
+	.error-404 .m-b-20 
+	{
+	  margin-bottom: 20px!important;
+	}
+	.error-404 .m-t-20 
+	{
+	  margin-top: 20px!important;
+	}
+		
+		
+</style>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/welcome">
+    		<img src="/images/ApplicationLogo.png" alt="Logo" style="width:70px;height:70px">
+ 		 </a>
+  		<span class="navbar-brand mb-0 h1"><h2 style="text-align:center">Public Library</h2></span>
+  		<div style="float: right">
+			<p style="float: left;color:white;" th:text="${sessionClient}"></p>
+		</div>
+	</nav>	
+	<div class="error-404">
+	    <div class="error-code m-b-10 m-t-20">404 <i class="fa fa-warning"></i></div>
+	    <h2 class="font-bold">Oops 404! That page can’t be found.</h2>
+	    <div class="error-desc">
+	        Sorry, but the page you are looking for was either not found or does not exist. <br/>
+	        Try refreshing the page or click the button below to go back to thePublic Library Homepage.
+	        <div><br/>
+			<button class="btn btn-secondary" type="reset" value="Cancel" onclick="window.location='/welcome'" style="margin-top: 2%;">Go To Homepage</button>
+	        </div>
+	    </div>
+	</div>
+
+</body>
+</html>

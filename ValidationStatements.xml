@@ -1,0 +1,10 @@
+<ValidationStatement>
+	<emailErrorString>Please write valid email address for eg. john.doe@gmail.com</emailErrorString>
+	<passwordErrorString>Password must contain at least 6 characters,
+		including Upper/lowercase, numbers and some of the special characters like
+		?!@#$%^&amp;*()</passwordErrorString>
+	<emptyErrorString>Please fill the detail.</emptyErrorString>
+	<phoneErrorString>Please provide a real 10 digit phone number.
+	</phoneErrorString>
+	<cpasswordErrorString>Passwords must match.</cpasswordErrorString>
+</ValidationStatement>
